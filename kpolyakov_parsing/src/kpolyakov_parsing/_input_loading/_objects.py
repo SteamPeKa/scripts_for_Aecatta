@@ -3,14 +3,21 @@
 # Creation time: 14:07
 # Creator: SteamPeKa
 
+import enum
 from typing import Iterable as _Iterable
 from typing import Sized as _Sized
+
+
+class OutputType(enum.Enum):
+    HTML = 0
+    TXT = 1
 
 
 class SimpleTask(object):
     def __init__(self, USE_task_key, task_bank_key):
         self.__USE_task_key = str(USE_task_key)
         self.__task_bank_key = str(task_bank_key)
+        self.__raw_answer = None
 
     @property
     def USE_task_key(self):
@@ -75,6 +82,29 @@ class SimpleTask(object):
             return True
         else:
             return self.__gt__(other)
+
+    @property
+    def raw_answer(self):
+        if self.__raw_answer is None:
+            raise RuntimeError("Task {}:{} has no answer yet".format(self.USE_task_key, self.task_bank_key))
+        else:
+            return self.__raw_answer
+
+    @raw_answer.setter
+    def raw_answer(self, html_data):
+        if self.__raw_answer is None:
+            self.__raw_answer = html_data
+        else:
+            raise RuntimeError("Adding data for a task with known answer.")
+
+    def has_answer(self):
+        return self.__raw_answer is not None
+
+    def get_answer(self, output_type: OutputType = OutputType.HTML):
+        if output_type == OutputType.HTML:
+            return self.raw_answer
+        elif output_type == OutputType.TXT:
+            return self.raw_answer.replace("<br/>", "\n")
 
 
 class TaskBatch(_Iterable[SimpleTask], _Sized):

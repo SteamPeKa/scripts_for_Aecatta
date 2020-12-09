@@ -7,7 +7,7 @@ import setuptools
 
 setuptools.setup(
     name="kpolyakov_parsing",
-    version="0.01alpha",
+    version="0.1",
     author="SteamPeKa",
     author_email="vladimir.o.balagurov@yandex.ru",
     description="Fills web form and acquires answers from kpolyakov.spb.ru",
@@ -16,6 +16,5 @@ setuptools.setup(
     package_dir={"": "src"},
     test_suite="tests",
     zip_safe=False,
-    install_requires=["mechanize>=0.4.5",
-                      "pytest>=3.0.0"]
+    install_requires=["pytest>=3.0.0"]
 )

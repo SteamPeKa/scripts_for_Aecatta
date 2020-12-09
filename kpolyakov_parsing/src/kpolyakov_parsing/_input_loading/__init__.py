@@ -4,4 +4,4 @@
 # Creator: SteamPeKa
 
 from ._load_from_txt import load_from_txt
-from ._objects import TaskBatch, SimpleTask
+from ._objects import TaskBatch, SimpleTask, OutputType
