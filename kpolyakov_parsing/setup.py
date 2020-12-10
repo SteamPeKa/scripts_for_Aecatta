@@ -16,5 +16,5 @@ setuptools.setup(
     package_dir={"": "src"},
     test_suite="tests",
     zip_safe=False,
-    install_requires=["pytest>=3.0.0"]
+    install_requires=[]
 )
